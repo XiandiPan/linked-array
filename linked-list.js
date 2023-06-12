@@ -17,7 +17,9 @@ class LinkedList {
   length = 0;
 
   constructor(vals = []) {
-    for (let val of vals) this.push(val);
+    for (let val of vals){
+        this.push(val);
+    }
   }
 
   /** push(val): add new value to end of list. */
@@ -32,6 +34,7 @@ class LinkedList {
 
     this.tail = newNode;
 
+    this.length += 1;
 
   }
 
@@ -55,17 +58,18 @@ class LinkedList {
 
     const oldTail = this.tail;
 
-    while (current !== null) {
-      if (current.next === oldTail) {
-
+    while (current.next !== null) {
+      if (current.next.next === null) {
+        console.log("in conditional")
         this.tail = current;
-        this.tail.next = null;
-
+        current.next = null;
+        this.length -= 1;
+        break
       }
 
     }
 
-    return oldTail;
+    return oldTail.val;
 
 
   }
@@ -89,11 +93,14 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
+    let current = this.head;
+    let counter = 0;
+        while (counter < idx + 1){
+            current = current.next;
+            counter += 1;
+        }
 
-   return this.vals[idx]
-
-
-
+    return current;
   }
 
   /** setAt(idx, val): set val at idx to val */

@@ -45,7 +45,7 @@ describe("unshift", function() {
   });
 });
 
-describe("pop", function() {
+describe.only("pop", function() {
   it("removes node at end and decrements length", function() {
     let lst = new LinkedList([5, 10]);
 
