@@ -17,8 +17,8 @@ class LinkedList {
   length = 0;
 
   constructor(vals = []) {
-    for (let val of vals){
-        this.push(val);
+    for (let val of vals) {
+      this.push(val);
     }
   }
 
@@ -26,27 +26,36 @@ class LinkedList {
 
   push(val) {
 
-    let newNode = new Node(val);
 
-    if (this.head === null) this.head = newNode;
+    let n = new Node(val);
 
-    if (this.tail !== null) this.tail.next = newNode;
-
-    this.tail = newNode;
-
-    this.length += 1;
-
+    if (this.length === 0) {
+      this.head = n;
+      this.tail = n;
+    } else {
+      const oldTail = this.tail;
+      this.tail = n;
+      oldTail.next = this.tail;
+    }
+    this.length++;
   }
 
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
 
-    let newNode = new Node(val);
 
-    newNode.next = this.head; //defined the old head
+    const n = new Node(val);
 
-    this.head = newNode; //defined the new head
+    if (this.length === 0) {
+      this.head = n;
+      this.tail = n;
+    } else {
+      n.next = this.head;
+      this.head = n;
+    }
+    this.length++;
+
 
   }
 
@@ -54,39 +63,52 @@ class LinkedList {
 
   pop() {
 
-    let current = this.head;
 
-    const oldTail = this.tail;
 
-    while (current.next !== null) {
-      if (current.next.next === null) {
-        console.log("in conditional")
-        this.tail = current;
-        current.next = null;
-        this.length -= 1;
-        break
+    if (this.length === 0) {
+      return null;
+    }
+    let val = this.tail.val;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+
+    } else {
+      let current = this.head;
+
+      while (current.next.next !== null) {
+        current = current.next;
       }
 
+      current.next === null;// 1, 2 ,3
+      this.tail = current;
     }
 
-    return oldTail.val;
-
+    this.length--;
+    return val;
 
   }
+
+
 
   /** shift(): return & remove first item. */
 
   shift() {
 
-    if ( this.head !== null){
 
-      const oldHead = this.head;
-
-      this.head = this.head.next;
-
+    if (this.length === 0) {
+      return null;
     }
+    let val = this.head.val;
 
-    return  oldHead;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;//1,2,3
+    }
+    this.length--;
+    return val;
 
   }
 
@@ -94,13 +116,17 @@ class LinkedList {
 
   getAt(idx) {
     let current = this.head;
-    let counter = 0;
-        while (counter < idx + 1){
-            current = current.next;
-            counter += 1;
-        }
+    let idxCounter = 0;
+    while (this.length > idx && idx >= 0) {
+      if (idx === idxCounter) {
+        return current.val;
+      }
+      current = current.next;
+      idxCounter++;
 
-    return current;
+    }
+    throw new error("error");
+
   }
 
   /** setAt(idx, val): set val at idx to val */

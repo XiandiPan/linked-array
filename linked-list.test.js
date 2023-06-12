@@ -45,7 +45,7 @@ describe("unshift", function() {
   });
 });
 
-describe.only("pop", function() {
+describe("pop", function() {
   it("removes node at end and decrements length", function() {
     let lst = new LinkedList([5, 10]);
 
@@ -61,7 +61,7 @@ describe.only("pop", function() {
   });
 });
 
-describe("shift", function() {
+describe.only("shift", function() {
   it("removes node at start and decrements length", function() {
     let lst = new LinkedList([5, 10]);
 
@@ -77,7 +77,7 @@ describe("shift", function() {
   });
 });
 
-describe("getAt", function() {
+describe.only("getAt", function() {
   it("gets val at index", function() {
     let lst = new LinkedList([5, 10, 15, 20]);
 
