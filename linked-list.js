@@ -132,24 +132,94 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
+    let current = this.head;
+    let idxCounter = 0;
+    while (this.length > idx && idx >= 0) {
+      if (idx === idxCounter) {
+        return current.val = val;
+      }
+      current = current.next;
+      idxCounter++;
 
+    }
+    throw new error("error");
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
 
+    if (idx < 0 || idx > this.length){
+        throw new error(Error);
+    }
+
+    if (idx === 0){
+        this.unshift(val);
+    }
+    else if(idx === this.length){
+        this.push(val);
+    }
+    else{
+        let newNode = new Node(val);
+        let previous = null;
+        let current = this.head;
+        let idxCounter = 0;
+        while (idxCounter < idx){
+            previous = current;
+            current = current.next;
+            idxCounter++;
+        }
+        newNode.next = current;
+        previous.next = newNode;
+        this.length++;
+    }
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    if (idx < 0 || idx > this.length){
+        throw new error(Error);
+    }
 
+    if (idx === 0){
+        return this.shift();
+    }
+    else if(idx === this.length-1){
+        return this.pop();
+    }
+    else{
+        let previous = null;
+        let current = this.head;
+        let idxCounter = 0;
+        while (idxCounter < idx){
+            previous = current;
+            current = current.next;
+            idxCounter++;
+        }
+        previous.next = current.next;
+        this.length--;
+        return current.val;
+    }
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
+    let current = this.head;
+    let totalVal = 0;
+    let idxCounter = 0;
+    if (this.length === 0) return 0;
+    if (current.next === null){
+        return current.val;
+    }
+    while (idxCounter < this.length){
+        totalVal = totalVal += current.val;
+        current = current.next;
+        idxCounter += 1;
+    }
+    console.log("totalVal", totalVal);
+    return totalVal/this.length;
 
   }
 }

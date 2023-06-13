@@ -61,7 +61,7 @@ describe("pop", function() {
   });
 });
 
-describe.only("shift", function() {
+describe("shift", function() {
   it("removes node at start and decrements length", function() {
     let lst = new LinkedList([5, 10]);
 
@@ -77,7 +77,7 @@ describe.only("shift", function() {
   });
 });
 
-describe.only("getAt", function() {
+describe("getAt", function() {
   it("gets val at index", function() {
     let lst = new LinkedList([5, 10, 15, 20]);
 
@@ -194,7 +194,7 @@ describe("removeAt", function() {
   });
 });
 
-describe("average", function() {
+describe.only("average", function() {
   it("calculates the average of items in a list", function() {
     let lst = new LinkedList([2, 3, 1, 1, 7, 6, 9]);
     expect(lst.average()).toBeCloseTo(4.1429, 4);
